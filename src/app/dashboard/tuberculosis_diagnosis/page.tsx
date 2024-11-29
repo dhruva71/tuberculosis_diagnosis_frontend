@@ -6,7 +6,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
-    const SERVER_URL = 'http://localhost:3000/dashboard/tuberculosis_diagnosis/api';
+    const SERVER_URL = '/dashboard/tuberculosis_diagnosis/api';
     // const SERVER_URL_PYTHON = 'http://localhost:8000/upload';
 
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -113,7 +113,7 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
                     </button>)}
             </form>
             {uploadStatus && (
-                <p className="mt-4 text-center text-sm text-gray-700">{uploadStatus}</p>
+                <p className="mt-4 text-center text-lg text-gray-700">{uploadStatus}</p>
             )}
         </div>
     );
