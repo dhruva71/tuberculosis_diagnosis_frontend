@@ -1,13 +1,11 @@
 'use client'
 
 import {
-  UserGroupIcon,
   HomeIcon,
   CpuChipIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
@@ -26,7 +24,7 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={`flex h-[48px] grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium bg-sky-50 hover:bg-sky-100 text-blue-600 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3
-            ${pathname === link.href ? 'bg-sky-100 text-blue-600' : ''}
+            ${pathname === link.href ? 'bg-sky-400 text-blue-600' : ''}
             `}
           >
             <LinkIcon className="w-6" />
