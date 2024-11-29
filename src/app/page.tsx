@@ -14,9 +14,9 @@ export default function Home() {
                         Welcome to <span className="text-yellow-500">AI</span>mpact Diagnostics
                     </h1>
                     <button
-                        className="text-black hover:text-blue-600 flex flex-row h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:border-4 hover:border-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
+                        className="text-black flex flex-row h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium border-4 border-black hover:text-white hover:bg-black md:flex-none md:justify-start md:p-2 md:px-3">
                         <Link href={"/dashboard"}>
-                            <div className="hidden md:block">Login to get started</div>
+                            <div className="block">Login to get started</div>
                         </Link>
                     </button>
                 </div>

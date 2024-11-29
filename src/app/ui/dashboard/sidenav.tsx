@@ -1,20 +1,17 @@
 import Link from 'next/link';
 import NavLinks from '@/app/ui/dashboard/nav-links';
-import DiagnosticsLogo from '@/app/ui/diagnostics_logo';
 import { PowerIcon } from '@heroicons/react/24/outline';
+import {inter} from "@/app/ui/fonts";
 // import { signOut } from '@/auth';
 
 export default function SideNav() {
   return (
     <div className="flex h-full flex-col px-3 py-4 md:px-2">
       <Link
-        className="mb-2 flex flex-col items-center h-20 justify-start rounded-md bg-blue-100 p-4 md:h-40"
+        className="mb-2 flex flex-col items-center h-20 justify-center rounded-md bg-blue-100 p-4 md:h-40"
         href="/"
       >
-        <div className="max-w-20 text-white md:w-40">
-          <DiagnosticsLogo/>
-        </div>
-          AImpact Diagnostics
+          <p className={`${inter.className}`}>AImpact Diagnostics</p>
       </Link>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         <NavLinks />
