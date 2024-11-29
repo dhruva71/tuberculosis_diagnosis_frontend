@@ -12,6 +12,8 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [previewSrc, setPreviewSrc] = useState<string | null>(null);
     const [uploadStatus, setUploadStatus] = useState<string>('');
+    const [uploadSuccess, setUploadSuccess] = useState<boolean>(false);
+    const [hasTB, setHasTB] = useState<boolean>(false);
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0] || null;
@@ -23,6 +25,8 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
             reader.onloadend = () => {
                 setPreviewSrc(reader.result as string);
                 setUploadStatus('');
+                setUploadSuccess(false);
+                setHasTB(false);
             };
             reader.readAsDataURL(file);
         } else {
@@ -51,12 +55,13 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
 
             const {success, prediction} = response.data;
             if (success) {
-                setUploadStatus('Upload successful!');
+                setUploadSuccess(true);
                 if (prediction === 1) {
-                    setUploadStatus('Tuberculosis detected in X-ray.');
+                    setHasTB(true);
                 } else {
-                    setUploadStatus('X-ray is normal.');
+                    setHasTB(false);
                 }
+                setUploadStatus('Upload successful!');
             } else {
                 setUploadStatus('Upload failed.');
             }
@@ -114,6 +119,12 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
             </form>
             {uploadStatus && (
                 <p className="mt-4 text-center text-lg text-gray-700">{uploadStatus}</p>
+            )}
+            {uploadSuccess && hasTB && (
+                <p className="mt-4 text-center text-lg text-red-700">Tuberculosis detected in X-ray.</p>
+            )}
+            {uploadSuccess && !hasTB && (
+                <p className="mt-4 text-center text-lg text-green-700">X-ray is normal.</p>
             )}
         </div>
     );
