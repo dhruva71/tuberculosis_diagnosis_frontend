@@ -12,7 +12,7 @@ import { usePathname } from 'next/navigation';
 // Depending on the size of the application, this would be stored in a database.
 const links = [
   { name: 'Home', href: '/dashboard', icon: HomeIcon },
-  { name: 'Tuberculosis X-ray diagnostics', href: '/dashboard/customers', icon: CpuChipIcon },
+  { name: 'Tuberculosis X-ray diagnostics', href: '/dashboard/tuberculosis_diagnosis', icon: CpuChipIcon },
 ];
 
 export default function NavLinks() {
