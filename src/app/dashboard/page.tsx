@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {inter, lusitana} from "@/app/ui/fonts";
+import {lusitana} from "@/app/ui/fonts";
 
 export default function DashboardHome() {
     return (

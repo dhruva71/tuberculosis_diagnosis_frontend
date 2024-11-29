@@ -6,6 +6,9 @@ import {
 } from '@heroicons/react/24/outline';
 
 const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
+    const SERVER_URL = 'http://localhost:3000/dashboard/tuberculosis_diagnosis/api';
+    // const SERVER_URL_PYTHON = 'http://localhost:8000/upload';
+
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [previewSrc, setPreviewSrc] = useState<string | null>(null);
     const [uploadStatus, setUploadStatus] = useState<string>('');
@@ -40,7 +43,7 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
 
         try {
             setUploadStatus('Uploading...');
-            const response = await axios.post('http://localhost:8000/upload', formData, {
+            const response = await axios.post(SERVER_URL, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
