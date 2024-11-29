@@ -16,6 +16,7 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreviewSrc(reader.result as string);
+        setUploadStatus('');
       };
       reader.readAsDataURL(file);
     } else {
