@@ -6,16 +6,16 @@ import {inter} from "@/app/ui/fonts";
 
 export default function SideNav() {
   return (
-    <div className="flex h-full flex-col px-3 py-4 md:px-2">
+    <div className="flex h-full flex-col px-3 py-4 md:px-2 bg-gray-700">
       <Link
-        className="mb-2 flex flex-col items-center h-20 justify-center rounded-md bg-blue-100 p-4 md:h-40"
+        className="mb-2 flex flex-col items-center h-20 justify-center rounded-md bg-gray-700 p-4 md:h-40"
         href="/"
       >
           <p className={`${inter.className}`}>AImpact Diagnostics</p>
       </Link>
-      <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
+      <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2 bg-gray-700">
         <NavLinks />
-        <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
+        <div className="hidden h-auto w-full grow rounded-md bg-gray-700 md:block"></div>
         <form action={async () => {
             'use server';
             // await signOut();
