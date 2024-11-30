@@ -12,12 +12,18 @@ export default function Home() {
                     <h1 className="text-5xl font-bold">
                         Welcome to <span className="text-yellow-500">AI</span>mpact Diagnostics
                     </h1>
-                    <button
-                        className="text-black flex flex-row h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium border-4 border-black hover:text-white hover:bg-black md:flex-none md:justify-start md:p-2 md:px-3">
-                        <Link href={"/dashboard"}>
-                            <div className="block">Login to get started</div>
-                        </Link>
-                    </button>
+                    {/*<button*/}
+                    {/*    className="text-black flex flex-row h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium border-4 border-black hover:text-white hover:bg-black md:flex-none md:justify-start md:p-2 md:px-3">*/}
+                    {/*    <Link href={"/dashboard"}>*/}
+                    {/*        <div className="block">Login to get started</div>*/}
+                    {/*    </Link>*/}
+                    {/*</button>*/}
+
+                    <div>
+                        <Link href="/auth/signin">Sign In</Link>
+                        <span> | </span>
+                        <Link href="/auth/signup">Sign Up</Link>
+                    </div>
                 </div>
             </main>
             <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
