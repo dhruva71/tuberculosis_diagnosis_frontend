@@ -20,7 +20,7 @@ export default function Home() {
                     {/*</button>*/}
 
                     <div>
-                        <Link href="/auth/signin/page">Sign In</Link>
+                        <Link href="/auth/signin">Sign In</Link>
                         <span> | </span>
                         <Link href="/auth/signup">Sign Up</Link>
                     </div>
