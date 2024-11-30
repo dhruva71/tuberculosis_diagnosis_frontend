@@ -24,7 +24,7 @@ export default function NavLinks() {
           flex h-12 items-center justify-center gap-2 rounded-md p-3 text-sm font-medium
           bg-gray-700 text-blue-50 hover:bg-sky-100 hover:text-blue-600
           md:flex-none md:justify-start md:p-2 md:px-3
-          ${isActive ? 'outline outline-2 outline-offset-2 text-blue-600' : ''}
+          ${isActive ? 'outline outline-2 outline-offset-2 text-blue-50 bg-gray-500' : ''}
         `;
 
                 return (
