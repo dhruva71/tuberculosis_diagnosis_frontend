@@ -1,8 +1,12 @@
-// pages/auth/signin.js
+import { NextPage } from 'next';
+import React from 'react';
 
-import { getCsrfToken } from "next-auth/react";
+// Define the shape of the props
+interface SignInProps {
+  csrfToken: string | undefined;
+}
 
-export default function SignIn({ csrfToken }) {
+const SignIn: NextPage<SignInProps> = ({ csrfToken }) => {
   return (
     <div style={styles.container}>
       <h1>Sign In</h1>
@@ -20,9 +24,10 @@ export default function SignIn({ csrfToken }) {
       </form>
     </div>
   );
-}
+};
 
-const styles = {
+// Define styles with proper TypeScript types
+const styles: { [key: string]: React.CSSProperties } = {
   container: {
     maxWidth: '400px',
     margin: '50px auto',
@@ -50,11 +55,4 @@ const styles = {
   },
 };
 
-// Fetch CSRF token server-side
-export async function getServerSideProps(context) {
-  return {
-    props: {
-      csrfToken: await getCsrfToken(context),
-    },
-  };
-}
+export default SignIn;
