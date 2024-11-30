@@ -47,7 +47,7 @@ export default NextAuth({
     },
   },
   pages: {
-    signIn: "/",
+    signIn: "/auth/signin",
     // You can add more custom pages like signUp, error, etc.
   },
 });
