@@ -30,7 +30,7 @@ model User {
   image          String?
   password       String?
   // accounts       Account[]
-  sessions       Session[]
+  // sessions       Session[]
 }
 
 // model Account {
@@ -52,14 +52,14 @@ model User {
 //   @@unique([provider, providerAccountId])
 // }
 
-model Session {
-  id           Int       @id @default(autoincrement())
-  sessionToken String    @unique
-  userId       Int
-  expires      DateTime
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
+// model Session {
+//   id           Int       @id @default(autoincrement())
+//   sessionToken String    @unique
+//   userId       Int
+//   expires      DateTime
+//
+//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+// }
 
 model VerificationToken {
   identifier String

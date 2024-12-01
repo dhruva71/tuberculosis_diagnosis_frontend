@@ -8,6 +8,8 @@ export type User = {
     id: number;
     name: string;
     email: string;
+    emailVerified: Date;
     image: string;
     password: string;
+    // sessions: number[];
 };

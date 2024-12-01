@@ -1,40 +1,65 @@
-import type { User } from '@/app/lib/definitions';
+// Import necessary modules and types
+import type {User} from '@/app/lib/definitions';
 import bcrypt from 'bcrypt';
-import {Prisma} from "@prisma/client";
-import sql from '@prisma/client'
-
+import {PrismaClient} from '@prisma/client'; // Correct import
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import { authConfig } from './auth.config';
-import { z } from 'zod';
+import {authConfig} from './auth.config';
+import {z} from 'zod';
 
-async function getUser(email: string): Promise<User | undefined> {
-  try {
-    const user = await sql<User>`SELECT * FROM users WHERE email=${email}`;
-    return user.rows[0];
-  } catch (error) {
-    console.error('Failed to fetch user:', error);
-    throw new Error('Failed to fetch user.');
-  }
+// Instantiate PrismaClient
+const prisma = new PrismaClient();
+
+// Updated getUser function using Prisma's findUnique
+async function getUser(email: string): Promise<User | null> {
+    try {
+        const user = await prisma.user.findUnique({
+            where: {email},
+        });
+        // create a user object from the returned data
+        // check if the user is null or not
+        if (!user) return null;
+        else {
+            // create a user object from the returned data
+            return {
+                id: user.id,
+                name: user.name!,
+                email: user.email!,
+                emailVerified: user.emailVerified!,
+                image: user.image!,
+                password: user.password!,
+            };
+        }
+    } catch (error) {
+        console.error('Failed to fetch user:', error);
+        throw new Error('Failed to fetch user.');
+    }
 }
 
-export const { auth, signIn, signOut } = NextAuth({
-  ...authConfig,
-  providers: [
-    Credentials({
-      async authorize(credentials) {
-        const parsedCredentials = z
-          .object({ email: z.string().email(), password: z.string().min(6) })
-          .safeParse(credentials);
+// Export NextAuth configuration
+export const {auth, signIn, signOut} = NextAuth({
+    ...authConfig,
+    providers: [
+        Credentials({
+            async authorize(credentials) {
+                // Validate credentials using Zod
+                const parsedCredentials = z
+                    .object({email: z.string().email(), password: z.string().min(6)})
+                    .safeParse(credentials);
 
-        if (parsedCredentials.success) {
-          const { email, password } = parsedCredentials.data;
-          const user = await getUser(email);
-          if (!user) return null;
-        }
+                if (parsedCredentials.success) {
+                    const {email, password} = parsedCredentials.data;
+                    const user = await getUser(email);
 
-        return null;
-      },
-    }),
-  ],
+                    if (user && await bcrypt.compare(password, user.password)) {
+                        // If user exists and password matches, return the user object
+                        return user;
+                    }
+                }
+
+                // If validation fails or user not found/mismatch, return null
+                return null;
+            },
+        }),
+    ],
 });
