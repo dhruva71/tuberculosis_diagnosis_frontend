@@ -34,6 +34,8 @@ export async function POST(req: Request) {
         return NextResponse.json({ success: true, prediction: jsonResponse.prediction });
     } catch (error) {
         console.error("Error uploading image:", error);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         return NextResponse.json({ success: false, message: "Internal server error", error: error.message }, { status: 500 });
     }
 }
