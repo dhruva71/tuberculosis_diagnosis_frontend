@@ -37,29 +37,29 @@ async function getUser(email: string): Promise<User | null> {
 }
 
 // Export NextAuth configuration
-export const {auth, signIn, signOut} = NextAuth({
-    ...authConfig,
-    providers: [
-        Credentials({
-            async authorize(credentials) {
-                // Validate credentials using Zod
-                const parsedCredentials = z
-                    .object({email: z.string().email(), password: z.string().min(6)})
-                    .safeParse(credentials);
+export const { auth, signIn, signOut } = NextAuth({
+  ...authConfig,
+  providers: [
+    Credentials({
+      async authorize(credentials) {
+        const parsedCredentials = z
+          .object({ email: z.string().email(), password: z.string().min(6) })
+          .safeParse(credentials);
 
-                if (parsedCredentials.success) {
-                    const {email, password} = parsedCredentials.data;
-                    const user = await getUser(email);
+        if (parsedCredentials.success) {
+          const { email, password } = parsedCredentials.data;
+          const user = await getUser(email);
+          if (!user) return null;
 
-                    if (user && await bcrypt.compare(password, user.password)) {
-                        // If user exists and password matches, return the user object
-                        return user;
-                    }
-                }
+          // TODO check if password is correct
+          const passwordsMatch = await bcrypt.compare(password, user.password);
 
-                // If validation fails or user not found/mismatch, return null
-                return null;
-            },
-        }),
-    ],
+          if (passwordsMatch) return user;
+        }
+
+        console.log('Invalid credentials');
+        return null;
+      },
+    }),
+  ],
 });
