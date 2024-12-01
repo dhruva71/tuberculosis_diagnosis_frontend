@@ -1,9 +1,9 @@
+// app/ui/dashboard/SideNav.jsx or SideNav.tsx
+
 import Link from 'next/link';
 import NavLinks from '@/app/ui/dashboard/nav-links';
-import {PowerIcon} from '@heroicons/react/24/outline';
-import {inter} from "@/app/ui/fonts";
-import {signOut} from '@/auth';
-// import {signOut as nextAuthSignOut} from 'next-auth/react';
+import SignOutButton from '@/app/ui/dashboard/SignOutButton'; // Adjust the import path as necessary
+import { inter } from "@/app/ui/fonts";
 
 export default function SideNav() {
     return (
@@ -14,22 +14,10 @@ export default function SideNav() {
             >
                 <p className={`${inter.className}`}>AImpact Diagnostics</p>
             </Link>
-            <div
-                className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2 bg-gray-700">
-                <NavLinks/>
+            <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2 bg-gray-700">
+                <NavLinks />
                 <div className="hidden h-auto w-full grow rounded-md bg-gray-700 md:block"></div>
-                <form action={async () => {
-                    'use server'
-                    await signOut({redirectTo: '/', redirect: true});
-                }}>
-                    <button
-                        type="submit"
-                        className="flex h-[48px] grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium bg-gray-300 text-black hover:bg-sky-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3"
-                    >
-                        <PowerIcon className="w-6"/>
-                        <div className="hidden md:block">Sign Out</div>
-                    </button>
-                </form>
+                <SignOutButton /> {/* Client Component */}
             </div>
         </div>
     );
