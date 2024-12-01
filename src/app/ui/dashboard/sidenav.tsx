@@ -1,9 +1,9 @@
-'use client';
+// 'use client';
 import Link from 'next/link';
 import NavLinks from '@/app/ui/dashboard/nav-links';
 import { PowerIcon } from '@heroicons/react/24/outline';
 import {inter} from "@/app/ui/fonts";
-// import { signOut } from '@/auth';
+import { signOut } from '@/auth';
 import { signOut as signOutNextAuth } from "next-auth/react"
 // import {signOutAction} from "@/app/lib/actions";
 
@@ -20,10 +20,10 @@ export default function SideNav() {
         <NavLinks />
         <div className="hidden h-auto w-full grow rounded-md bg-gray-700 md:block"></div>
         <form action={async () => {
-            // 'use server';
+            'use server'
             // await signOutAction();
-            // await signOut({ redirectTo: '/login', redirect: false });
-            await signOutNextAuth();
+            await signOut({ redirectTo: '/', redirect: true });
+            // await signOutNextAuth();
           }}>
           <button className="flex h-[48px] grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium bg-gray-300 text-black hover:bg-sky-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
             <PowerIcon className="w-6" />
