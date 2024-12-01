@@ -20,9 +20,9 @@ export default function Home() {
                     {/*</button>*/}
 
                     <div>
-                        <Link href="/src/app/login/signin">Sign In</Link>
+                        <Link href="login/signin">Sign In</Link>
                         <span> | </span>
-                        <Link href="/src/app/login/signup">Sign Up</Link>
+                        <Link href="login/signup">Sign Up</Link>
                     </div>
                 </div>
             </main>
