@@ -1,4 +1,4 @@
-// pages/auth/signup.js
+// pages/login/signup.js
 
 import { useState } from "react";
 import { useRouter } from "next/router";

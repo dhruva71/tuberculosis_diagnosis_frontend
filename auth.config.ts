@@ -1,7 +1,13 @@
 import type { NextAuthConfig } from 'next-auth';
 
-export const authConfig ={
-  providers: [],
+export const authConfig = {
+  pages: {
+    signIn: '/login',
+  },
+  providers: [
+    // added later in auth.ts since it requires bcrypt which is only compatible with Node.js
+    // while this file is also used in non-Node.js environments
+  ],
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
@@ -15,8 +21,4 @@ export const authConfig ={
       return true;
     },
   },
-  pages: {
-    signIn: "/auth/signin",
-    // You can add more custom pages like signUp, error, etc.
-  },
-} satisfies NextAuthConfig;;
+} satisfies NextAuthConfig;

@@ -1,4 +1,4 @@
-// pages/api/auth/signup.ts
+// pages/api/login/signup.ts
 
 import type { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcrypt";

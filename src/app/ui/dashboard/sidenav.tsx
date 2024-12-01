@@ -2,7 +2,7 @@ import Link from 'next/link';
 import NavLinks from '@/app/ui/dashboard/nav-links';
 import { PowerIcon } from '@heroicons/react/24/outline';
 import {inter} from "@/app/ui/fonts";
-// import { signOut } from '@/auth';
+// import { signOut } from '@/login';
 
 export default function SideNav() {
   return (

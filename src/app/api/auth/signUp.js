@@ -1,4 +1,4 @@
-// pages/api/auth/signup.js
+// pages/api/login/signup.js
 
 import prisma from "../../lib/prisma";
 

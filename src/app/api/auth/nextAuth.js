@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaAdapter } from "@next-login/prisma-adapter";
 import prisma from "../../lib/prisma";
 import bcrypt from "bcrypt";
 
@@ -48,7 +48,7 @@ export default NextAuth({
     },
   },
   pages: {
-    signIn: "/auth/signin",
+    signIn: "/login/signin",
     // You can add more custom pages like signUp, error, etc.
   },
 });

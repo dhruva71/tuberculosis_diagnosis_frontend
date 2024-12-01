@@ -5,7 +5,7 @@ export type XrayData = {
 };
 
 export type User = {
-    id: number;
+    id: string;
     name: string;
     email: string;
     emailVerified: Date;
