@@ -1,7 +1,7 @@
 'use server';
 
-import {auth, signIn, signOut} from '@/auth';
-import { AuthError } from 'next-auth';
+import {signIn, signOut} from '@/auth';
+import {AuthError} from 'next-auth';
 
 
 export async function authenticate(

@@ -6,11 +6,6 @@ import {signOut} from '@/auth';
 // import {signOut as nextAuthSignOut} from 'next-auth/react';
 
 export default function SideNav() {
-    const handleSignOut = async () => {
-        'use server'
-        // await nextAuthSignOut();
-        await signOut({redirectTo: '/', redirect: true});
-    }
     return (
         <div className="flex h-full flex-col px-3 py-4 md:px-2 bg-gray-700">
             <Link
@@ -25,15 +20,15 @@ export default function SideNav() {
                 <div className="hidden h-auto w-full grow rounded-md bg-gray-700 md:block"></div>
                 <form action={async () => {
                     'use server'
-                    await signOut({ redirectTo: '/', redirect: true });
-                  }}>
-                <button type="submit"
-                    className="flex h-[48px] grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium bg-gray-300 text-black hover:bg-sky-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3"
-                    // onClick={handleSignOut}
-                >
-                    <PowerIcon className="w-6"/>
-                    <div className="hidden md:block">Sign Out</div>
-                </button>
+                    await signOut({redirectTo: '/', redirect: true});
+                }}>
+                    <button type="submit"
+                            className="flex h-[48px] grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium bg-gray-300 text-black hover:bg-sky-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3"
+                        // onClick={handleSignOut}
+                    >
+                        <PowerIcon className="w-6"/>
+                        <div className="hidden md:block">Sign Out</div>
+                    </button>
                 </form>
             </div>
         </div>

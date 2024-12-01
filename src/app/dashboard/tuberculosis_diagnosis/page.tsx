@@ -4,6 +4,7 @@ import axios from 'axios';
 import {
     ArrowUpOnSquareIcon,
 } from '@heroicons/react/24/outline';
+import Image from "next/image";
 
 const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
     const SERVER_URL = '/dashboard/tuberculosis_diagnosis/api';
@@ -101,7 +102,7 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
                 {/* Image Preview */}
                 {previewSrc && (
                     <div className="mt-4">
-                        <img
+                        <Image
                             src={previewSrc}
                             alt="Preview"
                             className="w-full max-w-xs rounded shadow"
