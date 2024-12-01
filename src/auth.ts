@@ -1,6 +1,6 @@
 // Import necessary modules and types
 import type {User} from '@/app/lib/definitions';
-import bcrypt from 'bcrypt';
+// import bcrypt from 'bcrypt';
 import {PrismaClient} from '@prisma/client'; // Correct import
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
