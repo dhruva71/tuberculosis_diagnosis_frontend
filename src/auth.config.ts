@@ -18,6 +18,9 @@ export const authConfig = {
       } else if (isLoggedIn) {
         return Response.redirect(new URL('/dashboard', nextUrl));
       }
+      // } else {
+      //   return Response.redirect(new URL('/login', nextUrl));
+      // }
       return true;
     },
   },
