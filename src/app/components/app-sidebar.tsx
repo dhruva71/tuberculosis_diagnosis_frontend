@@ -1,4 +1,4 @@
-import {Home, Inbox} from "lucide-react"
+import {Cog, Home, Inbox} from "lucide-react"
 import SignOutButton from '@/app/ui/dashboard/SignOutButton';
 
 import {
@@ -24,6 +24,13 @@ const items = [
         title: "Tuberculosis Diagnosis",
         url: "/dashboard/tuberculosis_diagnosis",
         icon: Inbox,
+    },
+]
+const settings = [
+    {
+        title: "Settings",
+        url: "/dashboard/settings",
+        icon: Cog,
     },
 ]
 
@@ -52,6 +59,14 @@ export function AppSidebar() {
                     <SidebarGroupLabel>Account</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
+                            <SidebarMenuItem key={'settings'}>
+                                <SidebarMenuButton asChild>
+                                    <Link href={settings[0].url}>
+                                        <Cog/>
+                                        <span>{settings[0].title}</span>
+                                    </Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
                             <SidebarMenuItem key={"signout"}>
                                 <SidebarMenuButton asChild>
                                     <SignOutButton/>
