@@ -1,9 +1,7 @@
 'use client';
-import {useState, ChangeEvent, FormEvent} from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
-import {
-    ArrowUpOnSquareIcon,
-} from '@heroicons/react/24/outline';
+import { ArrowUpOnSquareIcon } from '@heroicons/react/24/outline';
 import Image from "next/image";
 
 type PredictionResponse = {
@@ -16,7 +14,6 @@ type PredictionResponse = {
 
 const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
     const SERVER_URL = '/dashboard/tuberculosis_diagnosis/api';
-    // const SERVER_URL_PYTHON = 'http://localhost:8000/upload';
 
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [previewSrc, setPreviewSrc] = useState<string | null>(null);
@@ -57,20 +54,19 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
 
         try {
             setUploadStatus('Uploading...');
-            const response = await axios.post(SERVER_URL, formData, {
+            const response = await axios.post<PredictionResponse>(SERVER_URL, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
 
-            const {success, prediction} = response.data;
+            const { success, prediction } = response.data;
             if (success) {
                 setUploadSuccess(true);
                 if (prediction.most_common_class === 1) {
                     setHasTB(true);
                 } else {
                     setHasTB(false);
-
                 }
                 setProbabilities(prediction.probabilities);
                 setUploadStatus('Upload successful!');
@@ -122,23 +118,37 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
                         />
                     </div>
                 )}
-                {previewSrc &&
-                    (<button
+                {previewSrc && (
+                    <button
                         type="submit"
                         className="w-full flex items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-4 transition focus:outline-none"
                     >
-                        <ArrowUpOnSquareIcon className="w-5 h-5 mr-2"/>
+                        <ArrowUpOnSquareIcon className="w-5 h-5 mr-2" />
                         Upload
-                    </button>)}
+                    </button>
+                )}
             </form>
             {uploadStatus && (
-                <p className="mt-4 text-center text-lg text-gray-700">{uploadStatus}</p>
+                <p className="mt-4 text-center text-lg text-secondary">{uploadStatus}</p>
             )}
-            {uploadSuccess && hasTB && (
-                <p className="mt-4 text-center text-lg text-red-700">Tuberculosis detected in X-ray.</p>
-            )}
-            {uploadSuccess && !hasTB && (
-                <p className="mt-4 text-center text-lg text-green-700">X-ray is normal.</p>
+            {uploadSuccess && (
+                <div className="mt-4 text-center">
+                    {hasTB ? (
+                        <p className="text-lg text-red-700">Tuberculosis detected in X-ray.</p>
+                    ) : (
+                        <p className="text-lg text-green-700">X-ray is normal.</p>
+                    )}
+                    <div className="mt-4">
+                        <h2 className="text-xl font-semibold">Probabilities:</h2>
+                        <ul className="mt-2">
+                            {Object.entries(probabilities).map(([condition, probability]) => (
+                                <li key={condition} className="text-primary">
+                                    {condition}: {probability}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
             )}
         </div>
     );
