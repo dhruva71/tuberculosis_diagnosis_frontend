@@ -106,6 +106,8 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
                             src={previewSrc}
                             alt="Preview"
                             className="w-full max-w-xs rounded shadow"
+                            width={400}
+                            height={400}
                         />
                     </div>
                 )}
