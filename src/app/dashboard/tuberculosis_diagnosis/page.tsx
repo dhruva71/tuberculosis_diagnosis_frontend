@@ -97,6 +97,7 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
 
     const chartOptions = {
         responsive: true,
+        indexAxis: 'y' as const, // Make the chart horizontal
         plugins: {
             legend: {
                 display: true,
@@ -109,7 +110,7 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
             },
         },
         scales: {
-            y: {
+            x: {
                 beginAtZero: true,
                 ticks: {
                     callback: (value: number) => `${value}%`,
@@ -156,7 +157,7 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
                         {previewSrc && (
                             <Button
                                 type="submit"
-                                variant="primary"
+                                variant="default"
                                 className="w-full mt-4"
                             >
                                 Upload
