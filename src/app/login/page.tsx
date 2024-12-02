@@ -20,9 +20,10 @@ export default function LoginForm() {
 
     return (
         <main className="flex flex-col items-center justify-center min-h-screen px-8 py-12 sm:px-6 lg:px-8">
-            <form action={formAction} className="space-y-3">
+            <form action={formAction} className="space-y-3 border-4">
                 <div className="flex-1 rounded-lg bg-background px-6 pb-4 pt-8 shadow-md">
-                    <h1 className="mb-3 text-2xl font-serif text-foreground">Please log in to continue.</h1>
+                    <h1 className="mb-3 text-2xl text-foreground">AImpact Diagnostics</h1>
+                    <h3 className="mb-3 text-2xl font-serif text-foreground">Please log in to continue.</h3>
                     <div className="w-full">
                         <div>
                             <Label htmlFor="email" className="mb-3 mt-5 block text-xs font-medium text-foreground">
@@ -64,12 +65,12 @@ export default function LoginForm() {
                     </div>
                     <Button type="submit" className="mt-4 w-full" disabled={isPending}>
                         Log in
-                        <ArrowRightIcon className="ml-auto h-5 w-5" />
+                        <ArrowRightIcon className="ml-auto h-5 w-5"/>
                     </Button>
                     <div className="flex h-8 items-end space-x-1" aria-live="polite" aria-atomic="true">
                         {errorMessage && (
                             <>
-                                <ExclamationCircleIcon className="h-5 w-5 text-destructive" />
+                                <ExclamationCircleIcon className="h-5 w-5 text-destructive"/>
                                 <p className="text-sm text-destructive">{errorMessage}</p>
                             </>
                         )}
