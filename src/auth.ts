@@ -1,26 +1,20 @@
-// Import necessary modules and types
 import type {User} from '@/app/lib/definitions';
 // import bcrypt from 'bcrypt';
-import {PrismaClient} from '@prisma/client'; // Correct import
+import {PrismaClient} from '@prisma/client';
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import {authConfig} from './auth.config';
 import {z} from 'zod';
 
-// Instantiate PrismaClient
 const prisma = new PrismaClient();
 
-// Updated getUser function using Prisma's findUnique
 async function getUser(email: string): Promise<User | null> {
     try {
         const user = await prisma.user.findUnique({
             where: {email},
         });
-        // create a user object from the returned data
-        // check if the user is null or not
         if (!user) return null;
         else {
-            // create a user object from the returned data
             return {
                 id: user.id,
                 name: user.name!,
