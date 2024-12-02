@@ -1,39 +1,32 @@
-import type { Metadata } from "next";
-// import localFont from "next/font/local";
+import type {Metadata} from "next";
 import "@/app/ui/globals.css";
 import {inter} from "@/app/ui/fonts";
-
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
+import {ThemeProvider} from "@/components/theme-provider"
 
 export const metadata: Metadata = {
-  title: "AImpact Diagnostics",
-  description: "AImpact Diagnostics",
+    title: "AImpact Diagnostics",
+    description: "AImpact Diagnostics",
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
+                                       children,
+                                   }: Readonly<{
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${inter.className} antialiased`}
-      >
-      {/*<body*/}
-      {/*  className={`${geistSans.variable} ${geistMono.variable} antialiased`}*/}
-      {/*>*/}
-        {children}
-      </body>
-    </html>
-  );
+    return (
+        <html lang="en" suppressHydrationWarning>
+        <body
+            className={`${inter.className} antialiased`}
+        >
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+        >
+            {children}
+        </ThemeProvider>
+        </body>
+        </html>
+    );
 }
