@@ -6,6 +6,14 @@ import {
 } from '@heroicons/react/24/outline';
 import Image from "next/image";
 
+type PredictionResponse = {
+    success: boolean;
+    prediction: {
+        most_common_class: number;
+        probabilities: Record<string, string>; // A dictionary with probabilities as strings
+    };
+};
+
 const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
     const SERVER_URL = '/dashboard/tuberculosis_diagnosis/api';
     // const SERVER_URL_PYTHON = 'http://localhost:8000/upload';
@@ -15,6 +23,7 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
     const [uploadStatus, setUploadStatus] = useState<string>('');
     const [uploadSuccess, setUploadSuccess] = useState<boolean>(false);
     const [hasTB, setHasTB] = useState<boolean>(false);
+    const [probabilities, setProbabilities] = useState<Record<string, string>>({});
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0] || null;
@@ -57,11 +66,13 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
             const {success, prediction} = response.data;
             if (success) {
                 setUploadSuccess(true);
-                if (prediction === 1) {
+                if (prediction.most_common_class === 1) {
                     setHasTB(true);
                 } else {
                     setHasTB(false);
+
                 }
+                setProbabilities(prediction.probabilities);
                 setUploadStatus('Upload successful!');
             } else {
                 setUploadStatus('Upload failed.');
