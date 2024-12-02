@@ -1,5 +1,5 @@
 'use client';
-import { useState, ChangeEvent, FormEvent } from 'react';
+import {useState, ChangeEvent, FormEvent} from 'react';
 import axios from 'axios';
 import {
     Chart as ChartJS,
@@ -9,10 +9,10 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import {Bar} from 'react-chartjs-2';
+import {Button} from "@/components/ui/button";
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
+import {Input} from "@/components/ui/input";
 import Image from "next/image";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
@@ -72,7 +72,7 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
                 },
             });
 
-            const { success, prediction } = response.data;
+            const {success, prediction} = response.data;
             if (success) {
                 setUploadSuccess(true);
                 setHasTB(prediction.most_common_class === 1);
@@ -109,18 +109,29 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
         plugins: {
             legend: {
                 display: true,
-                position: 'top' as const,
+                position: 'top',
+                labels: {
+                    font: {
+                        size: 16, // Legend font size
+                    },
+                },
             },
             tooltip: {
-                callbacks: {
-                    label: (context: any) => `${context.raw}%`,
+                bodyFont: {
+                    size: 14, // Tooltip body font size
+                },
+                titleFont: {
+                    size: 16, // Tooltip title font size
                 },
             },
             datalabels: {
                 anchor: 'end',
                 align: 'right',
                 formatter: (value: number) => `${value}%`,
-                color: '#000', // Adjust the text color
+                color: '#000',
+                font: {
+                    size: 14, // Data label font size
+                },
             },
         },
         scales: {
@@ -128,10 +139,21 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
                 beginAtZero: true,
                 ticks: {
                     callback: (value: number) => `${value}%`,
+                    font: {
+                        size: 14, // X-axis font size
+                    },
+                },
+            },
+            y: {
+                ticks: {
+                    font: {
+                        size: 14, // Y-axis font size
+                    },
                 },
             },
         },
     };
+
 
     return (
         <div className="p-8 max-w-md mx-auto">
@@ -194,7 +216,7 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
                             )}
                             <div className="mt-4">
                                 <h2 className="text-xl font-semibold">Probabilities:</h2>
-                                <Bar data={chartData} options={chartOptions} />
+                                <Bar data={chartData} options={chartOptions}/>
                             </div>
                         </div>
                     )}
