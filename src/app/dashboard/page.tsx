@@ -17,16 +17,16 @@ export default function DashboardHome() {
             className="flex flex-row items-center justify-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
             <Link href="/dashboard/tuberculosis_diagnosis">
                 <Card>
+                    <CardContent>
+                        <Image src='/tb_diagnosis.png' alt='tb_diagnosis' width={400} height={400}/>
+                    </CardContent>
                     <CardHeader>
                         <CardTitle>Tuberculosis X-ray diagnostics</CardTitle>
                         <CardDescription>Use AI to diagnose tuberculosis</CardDescription>
                     </CardHeader>
-                    {/*<CardContent>*/}
-                    {/*    <p>Use AI to diagnose tuberculosis</p>*/}
-                    {/*</CardContent>*/}
                 </Card>
-
             </Link>
         </div>
-    );
+    )
+        ;
 }
