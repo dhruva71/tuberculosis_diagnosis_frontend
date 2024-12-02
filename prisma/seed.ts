@@ -23,6 +23,22 @@ async function main() {
       image: 'https://example.com/images/bob.png',
       password: 'a1mp@ct2024!', // Ensure passwords are hashed in your app
     },
+    {
+      id: '123e4567-e89b-12d3-a456-426614174002',
+      name: 'ganesh',
+      email: 'ganesh@tnex.com',
+      emailVerified: new Date(),
+      image: 'https://example.com/images/charlie.png',
+      password: 'tnex2024!', // Ensure passwords are hashed in your app
+    },
+    {
+      id: '123e4567-e89b-12d3-a456-426614174003',
+      name: 'testuser',
+      email: 'testuser@tnex.com',
+      emailVerified: new Date(),
+      image: 'https://example.com/images/david.png',
+      password: 'test1ng2024!', // Ensure passwords are hashed in your app
+    }
   ];
 
   for (const user of users) {
