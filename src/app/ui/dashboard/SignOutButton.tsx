@@ -1,9 +1,9 @@
-// app/ui/dashboard/SignOutButton.tsx
 'use client';
 
-import {PowerIcon} from '@heroicons/react/24/outline';
-import {signOut} from 'next-auth/react';
-import {useState} from 'react';
+import { PowerIcon } from '@heroicons/react/24/outline';
+import { signOut } from 'next-auth/react';
+import { useState } from 'react';
+import { Button } from "@/components/ui/button";
 
 export default function SignOutButton() {
     const [error, setError] = useState('');
@@ -19,15 +19,21 @@ export default function SignOutButton() {
 
     return (
         <>
-            <button
+            <Button
                 type="button"
                 onClick={handleSignOut}
-                className="flex h-[48px] grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium bg-gray-300 text-black hover:bg-sky-300 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3"
+                className="flex items-center justify-center text-sm font-medium md:justify-start w-full"
+                variant="secondary"
+                size="lg"
             >
-                <PowerIcon className="w-6"/>
-                <div className="hidden md:block">Sign Out</div>
-            </button>
-            {error.length > 0 && <p className="text-red-500 mt-2">{error}</p>}
+                <PowerIcon className="w-5 text-muted-foreground" />
+                <span className="hidden md:block text-foreground">Sign Out</span>
+            </Button>
+            {error.length > 0 && (
+                <p className="text-destructive mt-2 text-sm">
+                    {error}
+                </p>
+            )}
         </>
     );
 }
