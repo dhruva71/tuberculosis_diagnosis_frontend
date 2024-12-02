@@ -1,7 +1,14 @@
 'use client';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from 'chart.js';
+import {
+    Chart as ChartJS,
+    BarElement,
+    CategoryScale,
+    LinearScale,
+    Tooltip,
+    Legend,
+} from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -88,16 +95,17 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
                 data: Object.values(probabilities).map((value) =>
                     parseFloat(value.replace('%', ''))
                 ),
-                backgroundColor: '#3b82f6', // Theme color
-                borderColor: '#2563eb', // Theme color
+                backgroundColor: '#3b82f6',
+                borderColor: '#2563eb',
                 borderWidth: 1,
+                barThickness: 20, // Controls the thickness of the bars
             },
         ],
     };
 
     const chartOptions = {
         responsive: true,
-        indexAxis: 'y' as const, // Make the chart horizontal
+        indexAxis: 'y' as const,
         plugins: {
             legend: {
                 display: true,
@@ -107,6 +115,12 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
                 callbacks: {
                     label: (context: any) => `${context.raw}%`,
                 },
+            },
+            datalabels: {
+                anchor: 'end',
+                align: 'right',
+                formatter: (value: number) => `${value}%`,
+                color: '#000', // Adjust the text color
             },
         },
         scales: {
