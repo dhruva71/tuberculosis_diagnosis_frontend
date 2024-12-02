@@ -1,4 +1,4 @@
-import {Calendar, Home, Inbox, Search, Settings} from "lucide-react"
+import {Home, Inbox} from "lucide-react"
 import SignOutButton from '@/app/ui/dashboard/SignOutButton';
 
 import {
