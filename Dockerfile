@@ -25,7 +25,7 @@ COPY . .
 
 # Generate Prisma Client
 RUN npx prisma generate
-RUN npx prisma db seed
+#RUN npx prisma db seed
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
