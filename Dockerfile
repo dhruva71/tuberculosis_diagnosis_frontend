@@ -16,6 +16,8 @@ RUN \
   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
   else echo "Lockfile not found." && exit 1; \
   fi
+RUN npx prisma generate
+RUN npx prisma db seed
 
 # Rebuild the source code only when needed
 FROM base AS builder
