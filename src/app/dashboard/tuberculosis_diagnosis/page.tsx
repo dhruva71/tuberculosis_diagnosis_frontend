@@ -8,12 +8,14 @@ import {
     LinearScale,
     Tooltip,
     Legend,
+    ChartOptions,
 } from 'chart.js';
 import {Bar} from 'react-chartjs-2';
 import {Button} from "@/components/ui/button";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {Input} from "@/components/ui/input";
 import Image from "next/image";
+// import { DeepPartial } from 'chart.js/dist/types/utils';
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -103,13 +105,13 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
         ],
     };
 
-    const chartOptions = {
+    const chartOptions: ChartOptions<'bar'> = {
         responsive: true,
-        indexAxis: 'y' as const,
+        indexAxis: 'y', // Correctly typed
         plugins: {
             legend: {
                 display: true,
-                position: 'top',
+                position: 'bottom', // Valid position value
                 labels: {
                     font: {
                         size: 16, // Legend font size
@@ -124,21 +126,21 @@ const ClientTuberculosisXrayDiagnosisComponent: React.FC = () => {
                     size: 16, // Tooltip title font size
                 },
             },
-            datalabels: {
-                anchor: 'end',
-                align: 'right',
-                formatter: (value: number) => `${value}%`,
-                color: '#000',
-                font: {
-                    size: 14, // Data label font size
-                },
-            },
+            // datalabels: {
+            //     anchor: 'end',
+            //     align: 'right',
+            //     formatter: (value: number) => `${value}%`, // Correct function type
+            //     color: '#000',
+            //     font: {
+            //         size: 14, // Data label font size
+            //     },
+            // },
         },
         scales: {
             x: {
                 beginAtZero: true,
                 ticks: {
-                    callback: (value: number) => `${value}%`,
+                    callback: (value: number | string) => `${value}%`, // Correct callback type
                     font: {
                         size: 14, // X-axis font size
                     },
