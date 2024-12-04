@@ -63,7 +63,7 @@ COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/tsconfig.json ./tsconfig.json
 
 # Seed the database
-RUN npm install ts-node typescript
+RUN npm install ts-node typescript --legacy-peer-deps
 RUN npm install -g prisma
 RUN npx prisma generate
 RUN npx ts-node prisma/seed.ts
