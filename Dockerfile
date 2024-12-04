@@ -59,8 +59,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/package-lock.json ./package-lock.json
-COPY --from=builder /app/yarn.lock ./yarn.lock
-COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
+#COPY --from=builder /app/yarn.lock ./yarn.lock
+#COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
 
 # Install sqlite3 for Prisma
 RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 libsqlite3-dev && rm -rf /var/lib/apt/lists/*
