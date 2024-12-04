@@ -26,7 +26,7 @@ async function main() {
     {
       id: '123e4567-e89b-12d3-a456-426614174002',
       name: 'sandeep',
-      email: 'Sandeepusg@gmail.com',
+      email: 'sandeepusg@gmail.com',
       emailVerified: new Date(),
       image: 'https://example.com/images/charlie.png',
       password: 'sandeep2024!', // Ensure passwords are hashed in your app

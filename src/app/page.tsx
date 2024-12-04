@@ -21,7 +21,7 @@ export default function Home() {
 
                     <div>
                         <Link href="login">Sign In</Link>
-                        <span> | </span>
+                        {/*<span> | </span>*/}
                         {/*<Link href="login/signup">Sign Up</Link>*/}
                     </div>
                 </div>
