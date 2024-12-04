@@ -44,7 +44,7 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 # Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # Create a new system group and user for security
 RUN groupadd --system --gid 1001 nodejs
@@ -61,6 +61,9 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/package-lock.json ./package-lock.json
 #COPY --from=builder /app/yarn.lock ./yarn.lock
 #COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
+
+# Copy the .env.production file
+COPY .env.production .env.production
 
 # Install sqlite3 for Prisma
 RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 libsqlite3-dev && rm -rf /var/lib/apt/lists/*
