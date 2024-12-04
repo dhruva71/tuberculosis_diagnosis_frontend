@@ -32,7 +32,7 @@ async function main() {
       password: 'sandeep2024!', // Ensure passwords are hashed in your app
     },
     {
-      id: '123e4567-e89b-12d3-a456-426614174002',
+      id: '123e4567-e89b-12d3-a456-426614174003',
       name: 'ganesh',
       email: 'ganesh@tnex.com',
       emailVerified: new Date(),
@@ -40,7 +40,7 @@ async function main() {
       password: 'tnex2024!', // Ensure passwords are hashed in your app
     },
     {
-      id: '123e4567-e89b-12d3-a456-426614174003',
+      id: '123e4567-e89b-12d3-a456-426614174004',
       name: 'testuser',
       email: 'testuser@tnex.com',
       emailVerified: new Date(),
