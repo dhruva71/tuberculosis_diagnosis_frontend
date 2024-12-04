@@ -17,15 +17,12 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
+
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
-# Generate Prisma Client
-RUN npx prisma generate
-#RUN npx prisma db seed
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
@@ -58,6 +55,17 @@ COPY --from=builder /app/public ./public
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+# Copy Prisma files and seed script
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/tsconfig.json ./tsconfig.json
+
+# Ensure Prisma CLI is available for migrations and seeding
+RUN npm install -g prisma
+
+# Seed the database
+RUN npx prisma generate
+RUN npx ts-node prisma/seed.ts
 
 USER nextjs
 
