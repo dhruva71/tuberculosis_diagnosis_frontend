@@ -13,7 +13,7 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
   elif [ -f package-lock.json ]; then npm ci --legacy-peer-deps; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
+  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm install --frozen-lockfile; \
   else echo "Lockfile not found." && exit 1; \
   fi
 
@@ -52,24 +52,25 @@ RUN useradd --system --uid 1001 --gid nodejs nextjs
 
 # Copy necessary files from the builder stage
 COPY --from=builder /app/public ./public
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder /app/.next ./.next
+COPY --from=deps /app/node_modules ./node_modules
 
 # Copy Prisma files and seed script
 COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/tsconfig.json ./tsconfig.json
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/package-lock.json ./package-lock.json
+COPY --from=builder /app/yarn.lock ./yarn.lock
+COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
 
 # Install sqlite3 for Prisma
-RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 libsqlite3-dev
+RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 libsqlite3-dev && rm -rf /var/lib/apt/lists/*
 
-# Seed the database
+# Install necessary tools for Prisma seeding
 RUN npm install ts-node typescript --legacy-peer-deps
 RUN npm install -g prisma
+
+# Generate Prisma Client and seed the database
 RUN npx prisma generate
-#RUN npx ts-node prisma/seed.ts
 RUN npx prisma db seed || true
 
 USER nextjs
@@ -77,8 +78,7 @@ USER nextjs
 EXPOSE 3000
 
 ENV PORT=3000
-
-# server.js is created by next build from the standalone output
-# https://nextjs.org/docs/pages/api-reference/next-config-js/output
 ENV HOSTNAME="0.0.0.0"
-CMD ["node", "server.js"]
+
+# Start the Next.js application
+CMD ["npx", "next", "start"]
