@@ -50,20 +50,20 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN groupadd --system --gid 1001 nodejs
 RUN useradd --system --uid 1001 --gid nodejs nextjs
 
-# Copy necessary files from the builder stage
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next ./.next
-COPY --from=deps /app/node_modules ./node_modules
+# Copy necessary files from the builder stage with ownership set to nextjs
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=deps --chown=nextjs:nodejs /app/node_modules ./node_modules
 
-# Copy Prisma files and seed script
-COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/package-lock.json ./package-lock.json
-#COPY --from=builder /app/yarn.lock ./yarn.lock
-#COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
+# Copy Prisma files and seed script with ownership set to nextjs
+COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
+COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
+COPY --from=builder --chown=nextjs:nodejs /app/package-lock.json ./package-lock.json
+#COPY --from=builder --chown=nextjs:nodejs /app/yarn.lock ./yarn.lock
+#COPY --from=builder --chown=nextjs:nodejs /app/pnpm-lock.yaml ./pnpm-lock.yaml
 
-# Copy the .env.production file
-COPY .env.production .env.production
+# Copy the .env.production file with ownership set to nextjs
+COPY --chown=nextjs:nodejs .env.production .env.production
 
 # Install sqlite3 for Prisma
 RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 libsqlite3-dev && rm -rf /var/lib/apt/lists/*
@@ -75,6 +75,9 @@ RUN npm install -g prisma
 # Generate Prisma Client and seed the database
 RUN npx prisma generate
 RUN npx prisma db seed || true
+
+# Ensure the entire /app directory is owned by nextjs
+RUN chown -R nextjs:nodejs /app
 
 USER nextjs
 
