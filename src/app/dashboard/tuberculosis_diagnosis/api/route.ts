@@ -6,6 +6,7 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+    const MODEL_BACKEND = process.env.MODEL_BACKEND;
     try {
         const formData = await req.formData();
         const file = formData.get('image') as File;
@@ -19,7 +20,7 @@ export async function POST(req: Request) {
         uploadFormData.append('image', file, file.name);
 
         // Send the image to the external API
-        const response = await fetch('http://localhost:8000/upload', {
+        const response = await fetch(`${MODEL_BACKEND}/upload`, {
             method: 'POST',
             body: uploadFormData,
         });
