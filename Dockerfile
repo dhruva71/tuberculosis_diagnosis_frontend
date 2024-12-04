@@ -66,7 +66,7 @@ COPY --from=builder /app/tsconfig.json ./tsconfig.json
 RUN npm install ts-node typescript --legacy-peer-deps
 RUN npm install -g prisma
 RUN npx prisma generate
-RUN npx ts-node prisma/seed.ts
+#RUN npx ts-node prisma/seed.ts
 
 USER nextjs
 
