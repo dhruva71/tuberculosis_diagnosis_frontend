@@ -62,12 +62,15 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/tsconfig.json ./tsconfig.json
 
+# Install sqlite3 for Prisma
+RUN apt-get update && apt-get install -y --no-install-recommends sqlite3 libsqlite3-dev
+
 # Seed the database
 RUN npm install ts-node typescript --legacy-peer-deps
 RUN npm install -g prisma
 RUN npx prisma generate
 #RUN npx ts-node prisma/seed.ts
-RUN npx prisma db seed
+RUN npx prisma db seed || true
 
 USER nextjs
 
