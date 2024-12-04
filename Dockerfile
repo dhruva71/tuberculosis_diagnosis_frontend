@@ -67,6 +67,7 @@ RUN npm install ts-node typescript --legacy-peer-deps
 RUN npm install -g prisma
 RUN npx prisma generate
 #RUN npx ts-node prisma/seed.ts
+RUN npx prisma db seed
 
 USER nextjs
 
